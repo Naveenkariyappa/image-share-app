@@ -6,6 +6,18 @@ if (Meteor.isClient) {
     Images.find({}, {sort:{createdOn: -1, rating:-1}})
   });
 
+   Template.body.helpers({username:function(){
+     if(Meteor.user()){
+       return Meteor.user().emails[0].address;
+     }
+    //console.log(Meteor.user().emails[0].address);
+    else{ 
+      return "Anonymous user"  
+    //return "Dont know who are you";
+   } 
+   }
+  });
+
    Template.images.events({
     'click .js-image':function(event){
         $(event.target).css("width", "50px");
